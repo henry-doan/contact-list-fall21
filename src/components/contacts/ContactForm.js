@@ -1,12 +1,29 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const ContactForm = ({ addContact }) => {
+const ContactForm = ({ addContact, id, firstName, phone, updateContact, setEditing }) => {
   const [contact, setContact] = useState({ firstName: "", phone: "" })
+
+  useEffect( () => {
+    // check if we are editing
+    if (id) {
+      // pre pop the form with the values
+      // setContact({ firstName: firstName, phone: phone })
+      setContact({ firstName, phone })
+    }
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // call add function 
-    addContact(contact)
+    // if we are editing
+    if (id) {
+      // call the update contact (contact)
+      updateContact(id, contact)
+      // close out the form 
+      setEditing(false)
+    } else {
+      // call add function 
+      addContact(contact)
+    }
     // reset the form
     setContact({ firstName: "", phone: "" })
   }

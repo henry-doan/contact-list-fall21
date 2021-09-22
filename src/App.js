@@ -29,10 +29,24 @@ const App = ({}) => {
     setContacts(contacts.filter( c => c.id !== id))
   }
 
+  const updateContact = (id, incommingContact) => {
+    const updatedContacts = contacts.map( c => {
+      if (c.id === id) {
+        return incommingContact
+      }
+      return c
+    })
+    setContacts(updatedContacts)
+  }
+
   return(
     <>
       <ContactForm addContact={addContact} />
-      <ContactList contacts={contacts} removeContact={removeContact} />
+      <ContactList 
+        contacts={contacts} 
+        removeContact={removeContact} 
+        updateContact={updateContact}
+      />
     </>
   )
 }

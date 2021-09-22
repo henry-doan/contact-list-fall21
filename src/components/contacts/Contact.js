@@ -1,6 +1,7 @@
 import ContactForm from './ContactForm';
 import { useState } from 'react'; 
-const Contact = ({ id, firstName, phone, removeContact }) => { 
+
+const Contact = ({ id, firstName, phone, removeContact, updateContact }) => { 
   const [editing, setEditing] = useState(false)
 
   return(
@@ -10,7 +11,13 @@ const Contact = ({ id, firstName, phone, removeContact }) => {
       {
         editing ?
         <>
-          <ContactForm />
+          <ContactForm 
+            id={id} 
+            firstName={firstName} 
+            phone={phone} 
+            updateContact={updateContact} 
+            setEditing={setEditing}
+          />
           <button onClick={() => setEditing(false)}>Cancel</button>
         </>
         :
